@@ -1,13 +1,28 @@
 # Hammer-PHP
 
-Full-featured PHP Docker image that supports:
+PHP Docker image on steroids. 
 
-1. Supervisord
-2. Crontab
-3. PHP-FPM
-4. Composer
-5. PHP Image Processing
-6. MongoDB, Iconv, PDO-MySQL Extensions
+
+## Features
+
+### PHP Extensions
+
+* iconv 
+* zip 
+* soap 
+* pdo_mysql 
+* bcmath 
+* gmp
+* GD
+* MongoDB
+* ast
+
+
+### Utilities
+
+* Supervisord
+* Crontab
+* Composer
 
 
 ## Credits

@@ -5,22 +5,22 @@
 # @license Apache-2.0
 # ==============================================================================
 
-FROM php:7.1-fpm
+FROM php:7.1-fpm-alpine
 MAINTAINER AaronJan <aaronjan@qq.com>
 
-RUN apt-get update \
 # install necessary dependencies.
-        && apt-get install rsync zip unzip openssh-client libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libssl-dev libgmp-dev wget -y \
+RUN apk add -U --no-cache rsync zip unzip openssh-client libxml2-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev openssl-dev gmp-dev autoconf gcc clang g++ make wget \
 # install common extensions.
-        && docker-php-ext-install -j$(nproc) iconv zip soap pdo_mysql bcmath gmp \
+        && NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
+        && docker-php-ext-install -j${NPROC} iconv zip soap pdo_mysql bcmath gmp \
 # GD extension must be configured manually.
         && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd \
+        && docker-php-ext-install -j${NPROC} gd \
 # these extension must be installed with PECL.
         && pecl install mongodb ast
 
 # Supervisor providers extensibility, Cron lets you do task scheduling.
-RUN apt-get install supervisor vim cron git -y
+RUN apk add --no-cache supervisor vim git
 
 # create basic folders.
 #
@@ -32,6 +32,8 @@ RUN mkdir -p /web/application/ \
         && mkdir -p /web/scripts/ \
 # /web/temp/ for temporary files.
         && mkdir -p /web/temp/ \
+# /web/crontabs/ for Cron.
+        && mkdir -p /web/crontabs/ \
 # /root/.ssh/ for SSH stuff.
         && mkdir -p ~/.ssh \
 
@@ -42,9 +44,6 @@ COPY conf/supervisor.conf /web/configs/supervisord.conf
 WORKDIR /web/temp
 COPY scripts/install_composer.sh /web/scripts/install_composer.sh
 RUN sh /web/scripts/install_composer.sh
-
-# start service.
-RUN /etc/init.d/cron start
 
 # switch to your project folder.
 WORKDIR /web/application
