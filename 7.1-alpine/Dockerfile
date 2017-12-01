@@ -1,6 +1,6 @@
 # ==============================================================================
 # Hammer PHP
-# PHP docker image that makes your development easier.
+# Docker PHP image on steroids.
 # 
 # @license Apache-2.0
 # ==============================================================================
@@ -21,14 +21,14 @@ RUN apk add -U --no-cache rsync zip unzip openssh-client libxml2-dev freetype-de
         && docker-php-ext-enable mongodb ast
 
 # Supervisor providers extensibility, Cron lets you do task scheduling.
-RUN apk add --no-cache supervisor vim git
+RUN apk add -U --no-cache supervisor vim git
 
 # create basic folders.
 #
 # /web/application/ is for your project.
 RUN mkdir -p /web/application/ \
 # /web/config/ for all your configurations.
-		&& mkdir -p /web/configs/ \
+        && mkdir -p /web/configs/ \
 # /web/scripts/ for executable scripts.
         && mkdir -p /web/scripts/ \
 # /web/temp/ for temporary files.
@@ -44,7 +44,9 @@ COPY conf/supervisor.conf /web/configs/supervisord.conf
 # install Composer.
 WORKDIR /web/temp
 COPY scripts/install_composer.sh /web/scripts/install_composer.sh
-RUN sh /web/scripts/install_composer.sh
+RUN sh /web/scripts/install_composer.sh \
+        && mv ./composer.phar /usr/local/bin/composer \
+        && chmod +x /usr/local/bin/composer
 
 # switch to your project folder.
 WORKDIR /web/application

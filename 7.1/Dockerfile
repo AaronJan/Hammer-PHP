@@ -1,6 +1,6 @@
 # ==============================================================================
 # Hammer PHP
-# PHP docker image that makes your development easier.
+# Docker PHP image on steroids.
 # 
 # @license Apache-2.0
 # ==============================================================================
@@ -42,7 +42,9 @@ COPY conf/supervisor.conf /web/configs/supervisord.conf
 # install Composer.
 WORKDIR /web/temp
 COPY scripts/install_composer.sh /web/scripts/install_composer.sh
-RUN sh /web/scripts/install_composer.sh
+RUN sh /web/scripts/install_composer.sh \
+        && mv ./composer.phar /usr/local/bin/composer \
+        && chmod +x /usr/local/bin/composer
 
 # start service.
 RUN /etc/init.d/cron start
