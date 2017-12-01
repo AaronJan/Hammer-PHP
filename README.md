@@ -1,6 +1,6 @@
 # Hammer-PHP
 
-PHP Docker image on steroids. 
+Docker PHP image on steroids. 
 
 
 ## Features
@@ -25,6 +25,11 @@ PHP Docker image on steroids.
 * Composer
 
 
+## Usage
+
+*TODO*
+
+
 ## Credits
 
-Base on [Official PHP Docker Image](https://github.com/docker-library/php)
+Base on [Official Docker PHP Image](https://github.com/docker-library/php)
