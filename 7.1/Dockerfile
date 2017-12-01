@@ -17,7 +17,8 @@ RUN apt-get update \
         && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
         && docker-php-ext-install -j$(nproc) gd \
 # these extension must be installed with PECL.
-        && pecl install mongodb ast
+        && pecl install mongodb ast \
+        && docker-php-ext-enable mongodb ast
 
 # Supervisor providers extensibility, Cron lets you do task scheduling.
 RUN apt-get install supervisor vim cron git -y

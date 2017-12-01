@@ -17,7 +17,8 @@ RUN apk add -U --no-cache rsync zip unzip openssh-client libxml2-dev freetype-de
         && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
         && docker-php-ext-install -j${NPROC} gd \
 # these extension must be installed with PECL.
-        && pecl install mongodb ast
+        && pecl install mongodb ast \
+        && docker-php-ext-enable mongodb ast
 
 # Supervisor providers extensibility, Cron lets you do task scheduling.
 RUN apk add --no-cache supervisor vim git
