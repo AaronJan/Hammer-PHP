@@ -9,7 +9,7 @@ FROM php:7.1-fpm-alpine
 MAINTAINER AaronJan <aaronjan@qq.com>
 
 # install necessary dependencies.
-RUN apk add -U --no-cache rsync zip unzip openssh-client libxml2-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev openssl-dev gmp-dev autoconf gcc clang g++ make wget \
+RUN apk add --no-cache rsync zip unzip openssh-client libxml2-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev openssl-dev gmp-dev autoconf gcc clang g++ make wget \
 # install common extensions.
         && NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
         && docker-php-ext-install -j${NPROC} iconv zip soap pdo_mysql bcmath gmp \
@@ -21,7 +21,7 @@ RUN apk add -U --no-cache rsync zip unzip openssh-client libxml2-dev freetype-de
         && docker-php-ext-enable mongodb ast
 
 # Supervisor providers extensibility, Cron lets you do task scheduling.
-RUN apk add -U --no-cache supervisor vim git
+RUN apk add --no-cache supervisor vim git
 
 # create basic folders.
 #
