@@ -1,17 +1,17 @@
 # Hammer-PHP
 
-Docker PHP image on steroids. 
+Docker PHP image on steroids.
 
 
 ## Features
 
 ### PHP Extensions
 
-* iconv 
-* zip 
-* soap 
-* pdo_mysql 
-* bcmath 
+* iconv
+* zip
+* soap
+* pdo_mysql
+* bcmath
 * gmp
 * GD
 * MongoDB
@@ -32,4 +32,4 @@ Docker PHP image on steroids.
 
 ## Credits
 
-Base on [Official Docker PHP Image](https://github.com/docker-library/php)
+Base on [Official Docker PHP Image (Alpine version)](https://github.com/docker-library/php)
