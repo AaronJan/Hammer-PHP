@@ -23,7 +23,7 @@ RUN mkdir -p /web/application/ \
         && mkdir -p ~/.ssh \
 
 # Copy configuration.
-COPY conf/supervisor.conf /web/configs/supervisord.conf
+COPY conf/supervisor.conf /web/configs/
 
 # Install necessary extensions.
 #
@@ -46,7 +46,7 @@ WORKDIR /web/temp
 RUN apk add --no-cache supervisor git vim rsync
 
 # Composer.
-COPY scripts/install_composer.sh /web/scripts/install_composer.sh
+COPY scripts/install_composer.sh /web/scripts/
 RUN sh /web/scripts/install_composer.sh \
         && mv ./composer.phar /usr/local/bin/composer \
         && chmod +x /usr/local/bin/composer
