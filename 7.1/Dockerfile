@@ -23,7 +23,7 @@ RUN mkdir -p /web/application/ \
         && mkdir -p ~/.ssh \
 
 # Copy configuration.
-COPY conf/supervisor.conf /web/configs/
+ADD conf/supervisord.conf /web/configs/supervisord.conf
 
 # Install necessary extensions.
 #
