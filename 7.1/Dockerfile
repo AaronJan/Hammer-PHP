@@ -20,7 +20,9 @@ RUN mkdir -p /web/application/ \
 # /web/crontabs/ for Cron.
         && mkdir -p /web/crontabs/ \
 # /root/.ssh/ for SSH stuff.
-        && mkdir -p ~/.ssh
+        && mkdir -p ~/.ssh/ \
+# /var/log/supervisord/ for Supervisord's logs.
+        && mkdir -p /var/log/supervisord/
 
 # Copy configuration.
 COPY configs/supervisord.conf /web/configs/
