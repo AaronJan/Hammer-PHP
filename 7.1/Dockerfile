@@ -29,7 +29,9 @@ COPY configs/supervisord.conf /web/configs/
 
 # Install necessary extensions.
 #
-RUN apk add --no-cache --virtual .build-deps build-base autoconf zip unzip openssh-client libxml2-dev freetype-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev openssl-dev gmp-dev wget \
+RUN apk add --no-cache libjpeg-turbo-dev gmp-dev libpng-dev
+
+RUN apk add --no-cache --virtual .build-deps build-base autoconf zip unzip openssh-client libxml2-dev freetype-dev libmcrypt-dev openssl-dev wget \
 # install common extensions.
         && NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
         && docker-php-ext-install -j${NPROC} zip soap pdo_mysql bcmath gmp \

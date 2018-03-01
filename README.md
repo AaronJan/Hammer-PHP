@@ -7,7 +7,6 @@ Docker PHP image on steroids.
 
 ### PHP Extensions
 
-* iconv
 * zip
 * soap
 * pdo_mysql
