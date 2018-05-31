@@ -2,12 +2,6 @@
 #
 # SSH Setup
 
-key=""
-while read line
-do
-  key=$key$line
-done
-
 eval $(ssh-agent -s)
-echo "$key" | tr -d '\r' | ssh-add - > /dev/null
+cat /dev/stdin | tr -d '\r' | ssh-add - > /dev/null
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
