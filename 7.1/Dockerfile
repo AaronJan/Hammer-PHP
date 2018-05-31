@@ -6,7 +6,7 @@
 # ==============================================================================
 
 FROM php:7.1-fpm-alpine
-MAINTAINER AaronJan <aaronjan@qq.com>
+LABEL maintainer="AaronJan <aaronjan@qq.com>"
 
 # create basic folders.
 # /web/application/ is for your project.
@@ -60,6 +60,10 @@ RUN apk del .build-deps
 
 # Switch to your project folder.
 WORKDIR /web/application
+
+# Copy bin scripts
+COPY bin/ssh_setup /usr/local/bin/
+RUN chmod +x /usr/local/bin/ssh_setup
 
 # Start application using Supervisord.
 CMD ["/usr/bin/supervisord", "-c", "/web/configs/supervisord.conf"]
