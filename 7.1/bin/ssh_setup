@@ -2,7 +2,11 @@
 #
 # SSH Setup
 
-read key
+key=""
+while read line
+do
+  key=$key$line
+done
 
 eval $(ssh-agent -s)
 echo "$key" | tr -d '\r' | ssh-add - > /dev/null
