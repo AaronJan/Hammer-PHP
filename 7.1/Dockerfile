@@ -29,7 +29,7 @@ COPY configs/supervisord.conf /web/configs/
 
 # Install necessary extensions.
 #
-RUN apk add --no-cache libjpeg-turbo-dev gmp-dev freetype-dev libpng-dev openssh-client openssl-dev
+RUN apk add --no-cache libjpeg-turbo-dev gmp-dev freetype-dev libpng-dev openssh openssl-dev curl
 
 RUN apk add --no-cache --virtual .build-deps build-base autoconf zip unzip libxml2-dev libmcrypt-dev wget \
 # install common extensions.
