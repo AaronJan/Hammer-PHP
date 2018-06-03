@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# SSH Setup
-
-eval $(ssh-agent -s)
-cat /dev/stdin | tr -d '\r' | ssh-add - > /dev/null
-echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config

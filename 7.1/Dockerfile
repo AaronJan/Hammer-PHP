@@ -62,8 +62,8 @@ RUN apk del .build-deps
 WORKDIR /web/application
 
 # Copy bin scripts
-COPY bin/ssh_setup /usr/local/bin/
-RUN chmod +x /usr/local/bin/ssh_setup
+COPY bin/with_ssh /usr/local/bin/
+RUN chmod +x /usr/local/bin/with_ssh
 
 # Start application using Supervisord.
 CMD ["/usr/bin/supervisord", "-c", "/web/configs/supervisord.conf"]
