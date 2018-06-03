@@ -3,7 +3,18 @@
 # SSH Setup
 set -e
 
-if [ -z "$1" ];
+script=
+if [ -n "$1" ];
+then
+    script="sh $1"
+fi
+
+if [ -n "$WITH_SSH_SCRIPT" ];
+then
+    script="eval \$WITH_SSH_SCRIPT"
+fi
+
+if [ -z "$script" ];
 then
     echo "should specify a script file."
     exit 1
@@ -12,4 +23,5 @@ fi
 eval $(ssh-agent -s)
 echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-sh $1
+
+eval "$script"
